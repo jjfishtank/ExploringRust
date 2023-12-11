@@ -1,5 +1,25 @@
+- [Background](#background)
+- [Analysis of Rust as a programming language](#analysis-of-rust-as-a-programming-language)
+  - [Classification of the language family](#classification-of-the-language-family)
+  - [Readability, write-ability, orthogonality, cost, and reliability](#readability-write-ability-orthogonality-cost-and-reliability)
+  - [Implementation method](#implementation-method)
+  - [Static and dynamic aspects](#static-and-dynamic-aspects)
+  - [Best suited projects](#best-suited-projects)
+  - [Data types and control structures](#data-types-and-control-structures)
+  - [Support for polymorphism](#support-for-polymorphism)
+  - [Support for object-oriented programming and inheritance](#support-for-object-oriented-programming-and-inheritance)
+  - [Use of pointers/references](#use-of-pointersreferences)
+  - [Memory management](#memory-management)
+  - [Functions/sub-programs implementation](#functionssub-programs-implementation)
+  - [Support for lambda functions and capturing variables](#support-for-lambda-functions-and-capturing-variables)
+  - [Stand-out features](#stand-out-features)
+- [Creating a grep-like tool](#creating-a-grep-like-tool)
+  - [Project Setup](#project-setup)
+- [Takeaways](#takeaways)
+
+
 ## Background
-The purpose of this project is to explore the Rust programming language in order to analyze it's strengths and weakneses. Going into this project, I had zero experience with Rust, so this project will double as a learning experience.
+The purpose of this project is to explore the Rust programming language in order to analyze it's strengths and weaknesses. Going into this project, I had zero experience with Rust, so this project will double as a learning experience.
 
 ## Analysis of Rust as a programming language
 ### Classification of the language family
@@ -18,7 +38,7 @@ Rust is a multi-paradigm language that supports imperative procedural, concurren
 Rust uses ahead-of-time (AOT) compilation. This means Rust code is compiled to machine code before it is run, resulting in efficient execution.
 
 ### Static and dynamic aspects
-Rust is statically typed and uses a sophisticated system of lifetimes to manage memory8. It also supports dynamic dispatch through traits.
+Rust is statically typed and uses a sophisticated system of lifetimes to manage memory. It also supports dynamic dispatch through traits.
 
 ### Best suited projects
 Rust is well-suited for system programming, game development, and other performance-critical applications. It’s also used in web development and for creating command-line tools.
@@ -36,7 +56,7 @@ While Rust has features similar to OOP, such as methods and encapsulation, it do
 Rust uses references and raw pointers for direct memory access. It also has unique pointers for heap allocation.
 
 ### Memory management
-Rust uses a system of ownership with a set of rules that the compiler checks at compile time1. It does not have a garbage collector.
+Rust uses a system of ownership with a set of rules that the compiler checks at compile time. It does not have a garbage collector.
 
 ### Functions/sub-programs implementation
 Functions are declared with the fn keyword. Methods are associated functions defined within an impl block.
@@ -49,3 +69,8 @@ Rust’s most notable feature is its focus on safety without sacrificing perform
 
 ## Creating a grep-like tool
 To get hands-on experience with Rust's features, I have created a command line tool modeling Linux's grep.
+
+### Project Setup
+After installing Rust on my system and an extension for VSCode, I was ready to create the project. Rust comes with a package manager called cargo. Running the cargo new command in the terminal created the initial project files and initialized git source control for the directory. Cargo uses a simple Cargo.toml manifest file for package metadata for compilation.
+
+## Takeaways
