@@ -16,8 +16,8 @@
   - [Support for Lambda Functions and Capturing Variables](#support-for-lambda-functions-and-capturing-variables)
   - [Stand-out Features](#stand-out-features)
 - [Creating a 2d game using Piston](#creating-a-2d-game-using-piston)
-  - [Project Setup](#project-setup)
-  - [The Nitty Gritty](#the-nitty-gritty)
+  - [The Process](#the-process)
+  - [The End Result](#the-end-result)
 - [Takeaways](#takeaways)
 
 
@@ -104,7 +104,7 @@ Rust is well-suited for system programming, game development (although existing 
 
 ### Data Types and Control Structures
 Rust has many built-in data types:
-* Scalar types: signed and unsigned iIntegers, floating point, booleans, characters, and strings.
+* Scalar types: signed and unsigned integers, floating point, booleans, characters, and strings.
 * Compound types: tuples, arrays, and slices
 * User-defined types: structs, enums, unions
 * Function types: functions, closures
@@ -159,10 +159,15 @@ Rust’s most notable feature is its focus on safety without sacrificing perform
 ## Creating a 2d game using Piston
 To get hands-on experience with Rust's features, I decided to create a simple 2D game using an open source game engine for Rust called [Piston](https://www.piston.rs/). I followed Piston's [getting started](https://github.com/PistonDevelopers/Piston-Tutorials/tree/master/getting-started) page to get started.
 
-### Project Setup
+### The Process
 After installing Rust on my system and an extension for VSCode, I was ready to create the project. Rust comes with a package manager called cargo. Running the cargo new command in the terminal created the initial project files and initialized git source control for the directory. Cargo uses a simple Cargo.toml manifest file for package metadata and dependencies for compilation. Adding the dependencies I needed (such as Piston with OpenGL) was easy using the `cargo add` command.
 
-### The Nitty Gritty
-A tool that I found to be immensly useful for coding in Rust is the built in documentation tool. By running the `cargo doc --open` command, cargo automatically builds an html file that contains documentation for all of the project's dependencies.
+A tool that I found to be immensely useful for coding in Rust is the built-in documentation tool. By running the `cargo doc --open` command, cargo automatically builds an html file that contains searchable documentation for all of the project's dependencies. I had to work through many syntax errors, such as not being able to access a vector with i32 integers.
+
+### The End Result
+I was able to write a very simple game that renders a 2D world map and a player that can be controlled with arrow keys. The code uses some of the features outlined in the analysis section, including lambda functions (closures), type implementation, loading and using external libraries, and complex match expressions.
 
 ## Takeaways
+I have already spotted an issue where there isn't any bounds checking for the player position, so it can wander off screen. The game is clearly very barebones, but it was a good learning exercise that can be expanded upon. 
+
+Rust's type-implementation approach was difficult to understand at first. I was stopped by many compilation errors due to the language's strict type safety. However, the error messages were generally helpful. The syntax for things like closures did not intuitively make sense to me, but it's clear that there's a lot of potential in capturing variables from within the defining scope. The pattern matching is great, and I wish C++ would implement something similar.
