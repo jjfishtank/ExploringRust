@@ -65,23 +65,29 @@ impl Object {
 }
 
 fn main() {
-    let settings = WindowSettings::new("Game", [512, 512]).exit_on_esc(true);
+    // Open Window
+    let settings = WindowSettings::new("Game", [992, 992]).exit_on_esc(true);
     let mut window: GlutinWindow = settings.build().expect("Could not create window");
-    let opengl = OpenGL::V4_5;
-    let mut gl = GlGraphics::new(opengl);
 
+    // OpenGL
+    let mut gl = GlGraphics::new(OpenGL::V4_5);
+
+    // Load World
     let map: Map = make_map();
     let mut player: Object = Object::new(0, 0, '@', RED);
 
+    // Load Glyph Texture from font file
     let texture_settings = TextureSettings::new().filter(Filter::Nearest);
     let ref mut glyphs = GlyphCache::new("assets/FiraSans-Regular.ttf", (), texture_settings)
         .expect("Could not load font");
 
+    // Start event loop
     let mut events = Events::new(EventSettings::new());
     while let Some(e) = events.next(&mut window) {
+        // Render Game
         if let Some(r) = e.render_args() {
-
             gl.draw(r.viewport(), |c, g| {
+                // Map Render
                 for i in 0..WORLD_SIZE as usize {
                     for j in 0..WORLD_SIZE as usize {
                         let pos: [f64; 4] = [
@@ -99,6 +105,7 @@ fn main() {
                     }
                 }
 
+                // Player Render
                 use graphics::Transformed;
                 let character = glyphs.character(TILE_SIZE as u32, player.character).unwrap();
                 graphics::Image::new_color(player.color).draw(
@@ -109,9 +116,18 @@ fn main() {
                 );
             });
         }
-
+        
+        // Player Movement
         if let Some(k) = e.button_args() {
-            
+            if k.state == ButtonState::Press{
+                match k.button {
+                    Button::Keyboard(Key::Up) => player.y_pos -= TILE_SIZE as i32,
+                    Button::Keyboard(Key::Down) => player.y_pos += TILE_SIZE as i32,
+                    Button::Keyboard(Key::Left) => player.x_pos -= TILE_SIZE as i32,
+                    Button::Keyboard(Key::Right) => player.x_pos += TILE_SIZE as i32,
+                    _ => (),
+                }
+            }
         }
     }
 }
