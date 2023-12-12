@@ -21,7 +21,7 @@ const TILE_SIZE: f64 = 32.0;
 const WORLD_SIZE: i32 = WINDOW_SIZE / TILE_SIZE as i32;
 
 #[derive(Clone)] // Implements clone trait to Tile
-                 // The Tile is the basic unit of the game map
+// The Tile is the basic positional unit of the game map
 struct Tile {
     color: Color,
 }
