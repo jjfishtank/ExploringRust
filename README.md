@@ -2,21 +2,22 @@
 - [Table of Contents](#table-of-contents)
 - [Background](#background)
 - [Analysis of Rust as a Programming Language](#analysis-of-rust-as-a-programming-language)
-  - [Classification of the language family](#classification-of-the-language-family)
-  - [Readability, write-ability, orthogonality, cost, and reliability](#readability-write-ability-orthogonality-cost-and-reliability)
-  - [Implementation method](#implementation-method)
-  - [Static and dynamic aspects](#static-and-dynamic-aspects)
-  - [Best suited projects](#best-suited-projects)
-  - [Data types and control structures](#data-types-and-control-structures)
-  - [Support for polymorphism](#support-for-polymorphism)
-  - [Support for object-oriented programming and inheritance](#support-for-object-oriented-programming-and-inheritance)
+  - [Classification of the Language Family](#classification-of-the-language-family)
+  - [Readability, Write-ability, Orthogonality, Cost, and Reliability](#readability-write-ability-orthogonality-cost-and-reliability)
+  - [Implementation Method](#implementation-method)
+  - [Static and Dynamic Aspects](#static-and-dynamic-aspects)
+  - [Best Suited Projects](#best-suited-projects)
+  - [Data Types and Control Structures](#data-types-and-control-structures)
+  - [Support for Polymorphism](#support-for-polymorphism)
+  - [Support for Object-oriented Programming and Inheritance](#support-for-object-oriented-programming-and-inheritance)
   - [Use of pointers/references](#use-of-pointersreferences)
-  - [Memory management](#memory-management)
-  - [Functions/sub-programs implementation](#functionssub-programs-implementation)
-  - [Support for lambda functions and capturing variables](#support-for-lambda-functions-and-capturing-variables)
-  - [Stand-out features](#stand-out-features)
-- [Creating a grep-like tool](#creating-a-grep-like-tool)
+  - [Memory Management](#memory-management)
+  - [Functions/sub-programs Implementation](#functionssub-programs-implementation)
+  - [Support for Lambda Functions and Capturing Variables](#support-for-lambda-functions-and-capturing-variables)
+  - [Stand-out Features](#stand-out-features)
+- [Creating a 2d game using Piston](#creating-a-2d-game-using-piston)
   - [Project Setup](#project-setup)
+  - [The Nitty Gritty](#the-nitty-gritty)
 - [Takeaways](#takeaways)
 
 
@@ -24,10 +25,10 @@
 The purpose of this project is to explore the Rust programming language in order to analyze it's strengths and weaknesses. Going into this project, I had zero experience with Rust, so this project will double as a learning experience.
 
 ## Analysis of Rust as a Programming Language
-### Classification of the language family
+### Classification of the Language Family
 Rust is a multi-paradigm language that supports imperative, procedural, concurrent, and functional styles. Like C++, Rust is a statically typed systems programming language. It emphasizes performance and low-level detail control. Unlike C++, Rust features a borrow checker that ensures memory safety. Unlike the garbage collectors from languages like Python and Java, the borrow checker runs at compile time—eliminating the performance penalty of run-time checking.
 
-### Readability, write-ability, orthogonality, cost, and reliability
+### Readability, Write-ability, Orthogonality, Cost, and Reliability
 
 * Readability: Rust’s syntax is designed to be clear and concise. It uses meaningful naming conventions and well-structured code. Rust makes as many zero-cost abstractions as possible.
   For example, even though Rust is statically typed, it uses type inference, reducing verbosity: `let x = 5; // infers that x is an integer`
@@ -54,10 +55,10 @@ Rust is a multi-paradigm language that supports imperative, procedural, concurre
   ```
   In this code, match is used to handle the `Option` type, which can be `Some` or `None`. This is a useful implementation of complex pattern matching that ensures safety by requiring all possible cases to be accounted for.
 
-### Implementation method
+### Implementation Method
 Rust uses ahead-of-time (AOT) compilation. Rust is a compiled language.
 
-### Static and dynamic aspects
+### Static and Dynamic Aspects
 Rust is statically typed and uses a sophisticated system of lifetimes to manage memory. The borrow checker does this at compile time. It also supports dynamic dispatch through traits: 
 * Trait Objects: In Rust, a trait object is created by specifying some sort of pointer (like a & reference or a Box<T> smart pointer), then the dyn keyword, and then the relevant trait. This allows us to use dynamic typing.
 * Dynamic Dispatch: When you call a method on a trait object, Rust uses dynamic dispatch to determine which implementation of that method needs to be called. This decision is made at runtime, based on the actual type of the object.
@@ -98,10 +99,10 @@ In this code, Animal is a trait with a method make_noise. Dog and Cat are struct
 
 This is a powerful feature that allows for polymorphism in Rust. However, it does come with a runtime cost, and Rust’s static dispatch is more efficient.
 
-### Best suited projects
+### Best Suited Projects
 Rust is well-suited for system programming, game development (although existing industry tools primarily use C++), threaded applications, and other performance-critical applications. It’s also used in web development and for creating command-line tools.
 
-### Data types and control structures
+### Data Types and Control Structures
 Rust has many built-in data types:
 * Scalar types: signed and unsigned iIntegers, floating point, booleans, characters, and strings.
 * Compound types: tuples, arrays, and slices
@@ -110,7 +111,7 @@ Rust has many built-in data types:
 * Pointer types: references, raw pointers (unsafe), function pointers
 * Trait types: trait objects, impl trait
 
-### Support for polymorphism
+### Support for Polymorphism
 Rust supports polymorphism through traits and generics. Traits define shared behavior, and generics allow for code that works over many types. 
 Generics are used as follows: 
 `fn foo<T>(arg: T) { ... }`
@@ -135,30 +136,33 @@ fn main() {
 ```
 "In this example, the trait Printable occurs as a trait object in both the type signature of print, and the cast expression in main."
 
-### Support for object-oriented programming and inheritance
+### Support for Object-oriented Programming and Inheritance
 While Rust has features similar to OOP, such as methods and encapsulation, it does not support inheritance. Rust maintains a "composition over inheritance" design choice, where traits are used to group behaviors for polymorphism. This requires some getting used to for those moving from C++ or Java.
 
 ### Use of pointers/references
 Rust uses references and raw pointers for direct memory access. Raw pointers do not maintain memory safety and are discouraged. Rust also has unique pointers for heap allocation.
 
-### Memory management
+### Memory Management
 Rust uses a system of ownership with a set of rules that make up the compile-time borrow checker. As long as unsafe operations are not used in the code, memory safety is guaranteed.
 
-### Functions/sub-programs implementation
+### Functions/sub-programs Implementation
 Functions are declared with the fn keyword. Methods are associated functions defined within an impl block.
 
-### Support for lambda functions and capturing variables
+### Support for Lambda Functions and Capturing Variables
 Rust supports lambda functions, known as closures. Closures can capture variables from their surrounding scope and are denoted with the `||` symbols. For example: 
 `let add_one = |x| x + 1;
 s` 
 In this code, add_one is a closure that takes one argument x and returns x + 1. The `||` symbols are used to enclose the parameters of the closure.
-### Stand-out features
+### Stand-out Features
 Rust’s most notable feature is its focus on safety without sacrificing performance. Its rich type system and ownership model guarantee memory safety and thread safety. The borrow checker is the stand-out feature here. Other notable features include support for complex match expressions and a built in package manager/builder.
 
-## Creating a grep-like tool
-To get hands-on experience with Rust's features, I have created a command line tool modeling Linux's grep.
+## Creating a 2d game using Piston
+To get hands-on experience with Rust's features, I decided to create a simple 2D game using an open source game engine for Rust called [Piston](https://www.piston.rs/). I followed Piston's [getting started](https://github.com/PistonDevelopers/Piston-Tutorials/tree/master/getting-started) page to get started.
 
 ### Project Setup
-After installing Rust on my system and an extension for VSCode, I was ready to create the project. Rust comes with a package manager called cargo. Running the cargo new command in the terminal created the initial project files and initialized git source control for the directory. Cargo uses a simple Cargo.toml manifest file for package metadata for compilation.
+After installing Rust on my system and an extension for VSCode, I was ready to create the project. Rust comes with a package manager called cargo. Running the cargo new command in the terminal created the initial project files and initialized git source control for the directory. Cargo uses a simple Cargo.toml manifest file for package metadata and dependencies for compilation. Adding the dependencies I needed (such as Piston with OpenGL) was easy using the `cargo add` command.
+
+### The Nitty Gritty
+A tool that I found to be immensly useful for coding in Rust is the built in documentation tool. By running the `cargo doc --open` command, cargo automatically builds an html file that contains documentation for all of the project's dependencies.
 
 ## Takeaways
